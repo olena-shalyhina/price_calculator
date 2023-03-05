@@ -1,0 +1,23 @@
+.range_wrapper {
+  height: 100px;
+  margin: auto;
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.storage_range,
+.transfer_range {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: rgb(25, 61, 61);
+}
+
+#storage_range,
+#transfer_range {
+  height: 50px;
+}
