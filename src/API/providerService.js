@@ -4,6 +4,7 @@ const providers = [
     minPayment: 7,
     priceStorage: 0.005,
     priceTransfer: 0.01,
+    id: 1,
   },
   {
     name: 'bunny',
@@ -13,6 +14,7 @@ const providers = [
       ssd: 0.02,
     },
     priceTransfer: 0.01,
+    id: 2,
   },
   {
     name: 'scaleway',
@@ -23,12 +25,14 @@ const providers = [
     },
     priceTransfer: 0.02,
     withoutPayment: 75,
+    id: 3,
   },
   {
     name: 'vultr',
     minPayment: 5,
     priceStorage: 0.01,
     priceTransfer: 0.01,
+    id: 4,
   },
 ];
 

@@ -1,14 +1,13 @@
 import React from 'react';
 import Chart from 'chart.js/auto';
-// import {
-//   Chart as ChartJS,
-//   CategoryScale,
-//   LinearScale,
-//   BarElement,
-//   Title,
-//   Tooltip,
-//   Legend,
-// } from 'chart.js';
+//import Chart as ChartJS,
+// CategoryScale,
+// LinearScale,
+// BarElement,
+// Title,
+// Tooltip,
+// Legend,
+// ('chart.js');
 import { Bar } from 'react-chartjs-2';
 
 // ChartJS.register(
@@ -20,12 +19,21 @@ import { Bar } from 'react-chartjs-2';
 //   Legend
 // );
 
-const ChartComponent = () => {
+const ChartComponent = ({
+  providers,
+}) => {
+  console.log(providers);
+
   const data = {
-    labels: ['1', '2', '3', '4'],
+    // labels: ['1', '2', '3', '4'],
+    labels: providers
+      ? providers.map(
+          (provider) => provider.name
+        )
+      : '',
     datasets: [
       {
-        label: 'My First Dataset',
+        label: '',
         data: [65, 59, 80, 81],
         // yAxisID: 'xAxis',
         backgroundColor: [
@@ -45,6 +53,11 @@ const ChartComponent = () => {
     ],
   };
   const options = {
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
     indexAxis: 'y',
     scales: {
       y: {
