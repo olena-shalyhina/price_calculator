@@ -15,6 +15,7 @@ const ProvidersListComponent = ({
       bunny: 'hdd',
       scaleway: 'multi',
     });
+  console.log(formData, '1');
 
   const handleOnChange = (event) => {
     const name = event.target.name;
@@ -26,7 +27,7 @@ const ProvidersListComponent = ({
     });
   };
 
-  console.log(formData);
+  console.log(formData, '2');
 
   return (
     <>

@@ -1,4 +1,3 @@
-// import React from 'react';
 import './App.css';
 import SummaryChartComponent from './components/SummaryChartComponent';
 import RangeComponent from './components/RangeComponent';
