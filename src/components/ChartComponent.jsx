@@ -1,40 +1,33 @@
 import React from 'react';
 import Chart from 'chart.js/auto';
-//import Chart as ChartJS,
-// CategoryScale,
-// LinearScale,
-// BarElement,
-// Title,
-// Tooltip,
-// Legend,
-// ('chart.js');
 import { Bar } from 'react-chartjs-2';
+import { calculatesTheTotalCost } from '../model/totalСostCalculation.js';
+import { useSelector } from 'react-redux';
 
-// ChartJS.register(
-//   CategoryScale,
-//   LinearScale,
-//   BarElement,
-//   Title,
-//   Tooltip,
-//   Legend
-// );
-
-const ChartComponent = ({
-  providers,
-}) => {
+const ChartComponent = ({ providers }) => {
   console.log(providers);
 
+  const storageValue = useSelector((state) => state.range.storageValue);
+  const transferValue = useSelector((state) => state.range.transferValue);
+  console.log(storageValue, transferValue);
+  let formData = {
+    bunny: 'hdd',
+    scaleway: 'multi',
+  };
+  const chartData = calculatesTheTotalCost(
+    providers,
+    storageValue,
+    transferValue,
+    formData
+  );
+  console.log(chartData);
   const data = {
     // labels: ['1', '2', '3', '4'],
-    labels: providers
-      ? providers.map(
-          (provider) => provider.name
-        )
-      : '',
+    labels: providers ? providers.map((provider) => provider.name) : '',
     datasets: [
       {
         label: '',
-        data: [65, 59, 80, 81],
+        data: chartData,
         // yAxisID: 'xAxis',
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -58,7 +51,7 @@ const ChartComponent = ({
         display: false,
       },
     },
-    indexAxis: 'y',
+    // indexAxis: 'y',
     scales: {
       y: {
         beginAtZero: true,
@@ -67,11 +60,7 @@ const ChartComponent = ({
   };
   return (
     <>
-      <Bar
-        type="Bar"
-        data={data}
-        options={options}
-      ></Bar>
+      <Bar type="Bar" data={data} options={options}></Bar>
     </>
   );
 };

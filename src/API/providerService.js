@@ -21,7 +21,7 @@ const providers = [
     minPayment: 7,
     priceStorage: {
       multi: 0.06,
-      singl: 0.03,
+      single: 0.03,
     },
     priceTransfer: 0.02,
     withoutPayment: 75,
@@ -36,10 +36,7 @@ const providers = [
   },
 ];
 
-export const getProviders =
-  async () => {
-    return new Promise((resolve) =>
-      resolve(providers)
-    );
-  };
+export const getProviders = async () => {
+  return new Promise((resolve) => resolve(providers));
+};
 console.log(providers);

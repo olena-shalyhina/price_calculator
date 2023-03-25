@@ -7,14 +7,20 @@ import Form from 'react-bootstrap/form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-const ProvidersListComponent = ({
-  providers,
-}) => {
-  const [formData, setFormData] =
-    useState({
-      bunny: 'hdd',
-      scaleway: 'multi',
-    });
+const ProvidersListComponent = ({ providers }) => {
+  const getInitialFormData = () => {
+    return providers
+      .filter((provider) => Object.keys(provider.priceStorage).length > 1)
+      .reduce(
+        (acc, provider) => ({
+          ...acc,
+          [provider.name]: Object.keys(provider.priceStorage)[0],
+        }),
+        {}
+      );
+  };
+  const [formData, setFormData] = useState(getInitialFormData());
+
   console.log(formData, '1');
 
   const handleOnChange = (event) => {
@@ -27,83 +33,43 @@ const ProvidersListComponent = ({
     });
   };
 
-  console.log(formData, '2');
-
   return (
     <>
       {providers.map((provider) =>
-        Object.keys(
-          provider.priceStorage
-        ).length <= 1 ? (
-          <Row
-            className="provider h-15  mb-3 mt-3"
-            key={provider.id}
-          >
+        Object.keys(provider.priceStorage).length <= 1 ? (
+          <Row className="provider h-15  mb-3 mt-3" key={provider.id}>
             <Col sm={9}>
-              <p className="h5">
-                {provider.name}
-              </p>
+              <p className="h5">{provider.name}</p>
             </Col>
             <Col sm={3}>
-              <img
-                src="#"
+              {/* <img
+                // src="#"
                 // src="../favicon.ico"
                 alt=""
-              ></img>
+              ></img> */}
             </Col>
           </Row>
         ) : (
-          <Row
-            className="provider  h-15 mb-3"
-            key={provider.id}
-          >
+          <Row className="provider  h-15 mb-3" key={provider.id}>
             <Col sm={9}>
-              <p className="h5">
-                {provider.name}
-              </p>
+              <p className="h5">{provider.name}</p>
             </Col>
             <Col sm={3}>
               <img src="#" alt=""></img>
             </Col>
             <Form>
-              <Form.Check
-                inline
-                // label="HDD"
-                label={
-                  Object.keys(
-                    provider.priceStorage
-                  )[0]
-                }
-                name={provider.name}
-                type="radio"
-                value={
-                  Object.keys(
-                    provider.priceStorage
-                  )[0]
-                }
-                defaultChecked={true}
-                onChange={
-                  handleOnChange
-                }
-              />
-              <Form.Check
-                inline
-                label={
-                  Object.keys(
-                    provider.priceStorage
-                  )[1]
-                }
-                name={provider.name}
-                type="radio"
-                value={
-                  Object.keys(
-                    provider.priceStorage
-                  )[1]
-                }
-                onChange={
-                  handleOnChange
-                }
-              />
+              {Object.keys(provider.priceStorage).map((option, index) => (
+                <Form.Check
+                  key={index}
+                  inline
+                  label={option}
+                  name={provider.name}
+                  type="radio"
+                  value={option}
+                  checked={formData[provider.name] === option}
+                  onChange={handleOnChange}
+                />
+              ))}
             </Form>
           </Row>
         )

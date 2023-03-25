@@ -1,7 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-} from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 // import Form from 'react-bootstrap/form';
 import Row from 'react-bootstrap/Row';
@@ -10,9 +7,8 @@ import { getProviders } from '../API/providerService.js';
 import ChartComponent from './ChartComponent.jsx';
 import ProvidersListComponent from './ProvidersListComponent.jsx';
 
-const SummaryChartComponent = () => {
-  const [providers, setProviders] =
-    useState('');
+const SummaryChartComponent = ({ ...props }) => {
+  const [providers, setProviders] = useState('');
 
   // useEffect(() => {
   //   setProviders(
@@ -36,18 +32,14 @@ const SummaryChartComponent = () => {
       <Row className="h-75">
         <Col sm={5}>
           <Row className="provider h-15  mb-5">
-            {providers ? (
-              <ProvidersListComponent
-                providers={providers}
-              />
-            ) : (
-              ''
-            )}
+            {providers ? <ProvidersListComponent providers={providers} /> : ''}
           </Row>
         </Col>
         <Col sm={7}>
           <ChartComponent
             providers={providers}
+            storageValue={props.storageValue}
+            transferValue={props.transferValue}
           />
         </Col>
       </Row>
