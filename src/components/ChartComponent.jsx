@@ -9,16 +9,13 @@ const ChartComponent = ({ providers }) => {
 
   const storageValue = useSelector((state) => state.range.storageValue);
   const transferValue = useSelector((state) => state.range.transferValue);
-  console.log(storageValue, transferValue);
-  let formData = {
-    bunny: 'hdd',
-    scaleway: 'multi',
-  };
+  const selectedOptions = useSelector((state) => state.options.selectedOptions);
+
   const chartData = calculatesTheTotalCost(
     providers,
     storageValue,
     transferValue,
-    formData
+    selectedOptions
   );
   console.log(chartData);
   const data = {

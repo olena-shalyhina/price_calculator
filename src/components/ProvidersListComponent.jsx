@@ -1,13 +1,13 @@
-import {
-  React,
-  // useEffect,
-  useState,
-} from 'react';
+import { React } from 'react';
 import Form from 'react-bootstrap/form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSelectedOptions } from '../store/optionsSlice';
 
 const ProvidersListComponent = ({ providers }) => {
+  const dispatch = useDispatch();
+
   const getInitialFormData = () => {
     return providers
       .filter((provider) => Object.keys(provider.priceStorage).length > 1)
@@ -19,23 +19,29 @@ const ProvidersListComponent = ({ providers }) => {
         {}
       );
   };
-  const [formData, setFormData] = useState(getInitialFormData());
 
-  console.log(formData, '1');
+  let selectedOptions = useSelector((state) => state.options.selectedOptions);
+  if (!Object.keys(selectedOptions).length) {
+    selectedOptions = getInitialFormData();
+  }
+  console.log(selectedOptions);
 
   const handleOnChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
 
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    dispatch(
+      setSelectedOptions({
+        ...selectedOptions,
+        [name]: value,
+      })
+    );
+    console.log(selectedOptions);
   };
 
   return (
     <>
-      {providers.map((provider) =>
+      {providers?.map((provider) =>
         Object.keys(provider.priceStorage).length <= 1 ? (
           <Row className="provider h-15  mb-3 mt-3" key={provider.id}>
             <Col sm={9}>
@@ -66,7 +72,7 @@ const ProvidersListComponent = ({ providers }) => {
                   name={provider.name}
                   type="radio"
                   value={option}
-                  checked={formData[provider.name] === option}
+                  checked={selectedOptions[provider.name] === option}
                   onChange={handleOnChange}
                 />
               ))}

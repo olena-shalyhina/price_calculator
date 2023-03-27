@@ -18,7 +18,6 @@ const providers = [
   },
   {
     name: 'scaleway',
-    minPayment: 7,
     priceStorage: {
       multi: 0.06,
       single: 0.03,

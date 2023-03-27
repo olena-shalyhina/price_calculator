@@ -1,10 +1,10 @@
-const getThePriceStorageByOption = (provider, formData) => {
+const getThePriceStorageByOption = (provider, selectedOptions) => {
   let priceByOption = '';
-  if (provider.name in formData) {
+  if (provider.name in selectedOptions) {
     priceByOption =
       provider.priceStorage[
         Object.keys(provider.priceStorage)
-          .filter((key) => Object.values(formData).includes(key))
+          .filter((key) => Object.values(selectedOptions).includes(key))
           .toString()
       ];
   }
@@ -15,13 +15,13 @@ const calculatesTheBasePrice = (
   provider,
   storageValue,
   transferValue,
-  formData
+  selectedOptions
 ) => {
   const basePrice =
     (storageValue - (provider.withoutPayment ? provider.withoutPayment : 0)) *
       (Object.keys(provider.priceStorage).length <= 1
         ? provider.priceStorage
-        : getThePriceStorageByOption(provider, formData)) +
+        : getThePriceStorageByOption(provider, selectedOptions)) +
     (transferValue - (provider.withoutPayment ? provider.withoutPayment : 0)) *
       provider.priceTransfer;
 
@@ -32,7 +32,7 @@ export const calculatesTheTotalCost = (
   providers,
   storageValue,
   transferValue,
-  formData
+  selectedOptions
 ) => {
   let totalPrice = providers
     ? providers
@@ -43,7 +43,7 @@ export const calculatesTheTotalCost = (
                   provider,
                   storageValue,
                   transferValue,
-                  formData
+                  selectedOptions
                 ),
                 provider.minPayment
               )
@@ -53,7 +53,7 @@ export const calculatesTheTotalCost = (
                   provider,
                   storageValue,
                   transferValue,
-                  formData
+                  selectedOptions
                 ),
                 provider.maxPayment
               )
@@ -61,7 +61,7 @@ export const calculatesTheTotalCost = (
                 provider,
                 storageValue,
                 transferValue,
-                formData
+                selectedOptions
               )
         )
         .map((element) => (element < 0 ? 0 : element))

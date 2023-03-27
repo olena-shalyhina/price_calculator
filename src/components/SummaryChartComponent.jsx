@@ -1,22 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
-// import Form from 'react-bootstrap/form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { getProviders } from '../API/providerService.js';
 import ChartComponent from './ChartComponent.jsx';
 import ProvidersListComponent from './ProvidersListComponent.jsx';
 
-const SummaryChartComponent = ({ ...props }) => {
+const SummaryChartComponent = () => {
   const [providers, setProviders] = useState('');
-
-  // useEffect(() => {
-  //   setProviders(
-  //     getProviders().then((data) =>
-  //       setProviders(data)
-  //     )
-  //   );
-  // }, []);
 
   useEffect(() => {
     fetchProviders();
@@ -36,15 +27,10 @@ const SummaryChartComponent = ({ ...props }) => {
           </Row>
         </Col>
         <Col sm={7}>
-          <ChartComponent
-            providers={providers}
-            storageValue={props.storageValue}
-            transferValue={props.transferValue}
-          />
+          <ChartComponent providers={providers} />
         </Col>
       </Row>
     </Container>
   );
 };
-
 export default SummaryChartComponent;
