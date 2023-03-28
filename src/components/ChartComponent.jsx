@@ -20,25 +20,27 @@ const ChartComponent = ({ providers }) => {
   console.log(chartData);
   const data = {
     // labels: ['1', '2', '3', '4'],
-    labels: providers ? providers.map((provider) => provider.name) : '',
+    labels: providers
+      ? providers.map((provider) => provider.name.toUpperCase())
+      : '',
     datasets: [
       {
         label: '',
         data: chartData,
         // yAxisID: 'xAxis',
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(255, 205, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(43, 195, 124, 0.5)',
+          'rgba(255, 159, 64, 0.5)',
+          'rgba(75, 192, 192, 0.5)',
         ],
         borderColor: [
           'rgb(255, 99, 132)',
-          'rgb(255, 159, 64)',
+          'rgb(43, 195, 124)',
           'rgb(255, 205, 86)',
           'rgb(75, 192, 192)',
         ],
-        borderWidth: 1,
+        borderWidth: 3,
       },
     ],
   };
@@ -48,7 +50,7 @@ const ChartComponent = ({ providers }) => {
         display: false,
       },
     },
-    // indexAxis: 'y',
+    indexAxis: 'y',
     scales: {
       y: {
         beginAtZero: true,

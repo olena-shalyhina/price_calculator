@@ -1,0 +1,23 @@
+.provider_list {
+  text-align: start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  min-width: 300px;
+  flex-wrap: nowrap;
+}
+
+.provider_list_name {
+  font-weight: 700;
+}
+
+.provider_list_name :nth-child(2) {
+  font-size: 0.9em;
+}
+
+img {
+  width: 2rem;
+  height: 2rem;
+}

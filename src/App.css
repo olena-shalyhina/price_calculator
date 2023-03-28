@@ -1,9 +1,10 @@
 .App {
-  background-color: rgb(195, 225, 212);
+  background-color: rgb(157, 184, 153);
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  height: 100vh;
+  min-height: 100vh;
+  color: rgb(64, 20, 9);
 }
 
 /* .App-logo {
