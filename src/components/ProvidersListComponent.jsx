@@ -47,19 +47,19 @@ const ProvidersListComponent = ({ providers }) => {
       {providers?.map((provider) =>
         Object.keys(provider.priceStorage).length <= 1 ? (
           <Row className="provider_list  " key={provider.id}>
-            <Col xs={3}>
+            <Col xs={2}>
               <img src={provider.icon} alt="Logo"></img>
             </Col>
-            <Col className="provider_list_name" xs={9}>
+            <Col className="provider_list_name" xs={10}>
               <p>{provider.name}</p>
             </Col>
           </Row>
         ) : (
           <Row className="provider_list  " key={provider.id}>
-            <Col xs={3}>
+            <Col xs={2}>
               <img src={provider.icon} alt="Logo"></img>
             </Col>
-            <Col className="provider_list_name" xs={9}>
+            <Col className="provider_list_name" xs={10}>
               <p>{provider.name}</p>
 
               <Form className="provider_list_name_option">

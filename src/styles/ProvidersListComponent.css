@@ -11,7 +11,7 @@
 .provider_list_name {
   font-weight: 700;
   line-height: 0.5em;
-  height: 40px;
+  height: 50px;
 }
 
 .provider_list_name_option {
@@ -26,7 +26,7 @@
 @media (max-width: 540px) {
   .provider_list_name {
     font-weight: 500;
-    height: 40px;
+    height: 30px;
     display: flex;
     align-items: center;
     column-gap: 20px;
