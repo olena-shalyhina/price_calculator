@@ -22,9 +22,11 @@ const ProvidersListComponent = ({ providers }) => {
   };
 
   let selectedOptions = useSelector((state) => state.options.selectedOptions);
+
   if (!Object.keys(selectedOptions).length) {
     selectedOptions = getInitialFormData();
   }
+
   console.log(selectedOptions);
 
   const handleOnChange = (event) => {
@@ -44,31 +46,23 @@ const ProvidersListComponent = ({ providers }) => {
     <>
       {providers?.map((provider) =>
         Object.keys(provider.priceStorage).length <= 1 ? (
-          <Row className="provider_list h-15  mb-3 mt-3" key={provider.id}>
+          <Row className="provider_list  " key={provider.id}>
             <Col xs={3}>
-              <img
-                src={provider.icon}
-                // src="../favicon.ico"
-                alt="Logo"
-              ></img>
+              <img src={provider.icon} alt="Logo"></img>
             </Col>
             <Col className="provider_list_name" xs={9}>
               <p>{provider.name}</p>
             </Col>
           </Row>
         ) : (
-          <Row className="provider_list  h-15 mb-3" key={provider.id}>
+          <Row className="provider_list  " key={provider.id}>
             <Col xs={3}>
-              <img
-                src={provider.icon}
-                // src="../favicon.ico"
-                alt="Logo"
-              ></img>
+              <img src={provider.icon} alt="Logo"></img>
             </Col>
             <Col className="provider_list_name" xs={9}>
               <p>{provider.name}</p>
 
-              <Form>
+              <Form className="provider_list_name_option">
                 {Object.keys(provider.priceStorage).map((option, index) => (
                   <Form.Check
                     key={index}

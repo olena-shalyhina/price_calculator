@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <div className="App">
+      <h1 className="padding pt-3">Price Calculate</h1>
       <RangeComponent />
       <SummaryChartComponent />
     </div>

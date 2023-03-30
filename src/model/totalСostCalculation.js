@@ -64,7 +64,7 @@ export const calculatesTheTotalCost = (
                 selectedOptions
               )
         )
-        .map((element) => (element < 0 ? 0 : element))
+        .map((element) => (element < 0 ? 0 : +element.toFixed(2)))
     : '';
   return totalPrice;
 };

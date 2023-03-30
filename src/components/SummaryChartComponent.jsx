@@ -5,7 +5,6 @@ import Col from 'react-bootstrap/Col';
 import { getProviders } from '../API/providerService.js';
 import ChartComponent from './ChartComponent.jsx';
 import ProvidersListComponent from './ProvidersListComponent.jsx';
-import '../styles/SummaryChartComponent.css';
 
 const SummaryChartComponent = () => {
   const [providers, setProviders] = useState('');
@@ -21,14 +20,14 @@ const SummaryChartComponent = () => {
 
   return (
     <Container className="mt-2">
-      <Row className="h-75">
+      <Row className="h-100 align-items-center">
         <Col md={4} sm={12}>
           <Row className="providers h-15  mb-2">
             {providers ? <ProvidersListComponent providers={providers} /> : ''}
           </Row>
         </Col>
         <Col md={8} sm={12}>
-          <ChartComponent className="canvas" providers={providers} />
+          <ChartComponent providers={providers} />
         </Col>
       </Row>
     </Container>

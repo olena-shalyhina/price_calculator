@@ -1,23 +1,44 @@
 .provider_list {
-  text-align: start;
   display: flex;
   justify-content: center;
-  align-items: center;
-  font-size: 0.75rem;
-  text-transform: uppercase;
+  align-items: baseline;
+  font-size: 0.75em;
   min-width: 300px;
   flex-wrap: nowrap;
+  row-gap: 10px;
 }
 
 .provider_list_name {
   font-weight: 700;
+  line-height: 0.5em;
+  height: 40px;
 }
 
-.provider_list_name :nth-child(2) {
-  font-size: 0.9em;
+.provider_list_name_option {
+  font-size: 0.8em;
 }
 
-img {
+.provider_list img {
   width: 2rem;
   height: 2rem;
+}
+
+@media (max-width: 540px) {
+  .provider_list_name {
+    font-weight: 500;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+    line-height: 1.5;
+  }
+
+  .provider_list_name_option {
+    font-size: 0.75em;
+  }
+
+  .provider_list img {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }
