@@ -20,8 +20,8 @@ const SummaryChartComponent = () => {
   };
 
   return (
-    <Container className="mt-2">
-      <Row className="main h-100 align-items-center">
+    <Container className="mt-5">
+      <Row className="main align-items-center justify-content-center">
         <Col md={4} sm={12}>
           <Row className="mb-2">
             {providers ? <ProvidersListComponent providers={providers} /> : ''}

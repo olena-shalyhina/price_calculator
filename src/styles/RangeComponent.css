@@ -17,6 +17,9 @@
 }
 
 @media (max-width: 540px) {
+  range_wrapper {
+    min-height: 100px;
+  }
   .storage_range,
   .transfer_range {
     font-size: 0.7em;
