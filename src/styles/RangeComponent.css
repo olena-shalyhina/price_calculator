@@ -12,6 +12,13 @@
   display: flex;
   flex-direction: column;
   width: 40%;
-  font-size: 0.7em;
+  font-size: 1em;
   font-weight: 500;
+}
+
+@media (max-width: 540px) {
+  .storage_range,
+  .transfer_range {
+    font-size: 0.7em;
+  }
 }

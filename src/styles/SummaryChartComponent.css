@@ -1,0 +1,6 @@
+@media (max-width: 540px) {
+  .main {
+    flex-direction: column-reverse;
+    row-gap: 30px;
+  }
+}
