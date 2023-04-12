@@ -17,8 +17,8 @@
 
 ---
 
-![node](https://img.shields.io/node/v/npm)
-![npm](https://img.shields.io/npm/v/npm)
+![node](https://img.shields.io/badge/node-v%2016.16.0-brightgreen)
+![npm](https://img.shields.io/badge/npm-v%208.11.0-blue)
 
 1.  ### Clone the repository: git clone https://github.com/olena-shalyhina/price_calculator
 2.  ### Go to the project folder :
