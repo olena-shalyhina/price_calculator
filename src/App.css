@@ -1,17 +1,29 @@
 .App {
-  background-color: rgb(166, 167, 166);
-  /* background-color: rgb(197, 234, 191); */
-  margin: 0;
+  /* background-color: rgb(166, 167, 166); */
+  background-color: rgb(192, 215, 203);
+  background: -webkit-linear-gradient(
+    90deg,
+    #e8cbb4,
+    #c89c96,
+    #ae8386,
+    #5a445c
+  );
+  background: linear-gradient(90deg, #e8cbb4, #c89c96, #ae8386, #5a445c);
+  margin: 0 auto;
   padding: 0;
   box-sizing: border-box;
   min-height: 100vh;
-  color: rgb(59, 15, 4);
+  color: rgb(25, 1, 57);
+  letter-spacing: 1.2px;
   text-transform: uppercase;
 }
-
+.main_container {
+  max-width: 1180px;
+  margin: 0 auto;
+}
 h1 {
   color: rgb(191, 94, 70);
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  /* text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
   text-align: center;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
 }

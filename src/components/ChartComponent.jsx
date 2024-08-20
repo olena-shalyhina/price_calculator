@@ -16,12 +16,12 @@ const ChartComponent = ({ providers }) => {
     providers,
     storageValue,
     transferValue,
-    selectedOptions
+    selectedOptions,
   );
 
   Chart.defaults.font.size = 8;
-  Chart.defaults.color = 'rgb(59, 15, 4)';
-  Chart.defaults.font.weight = 700;
+  Chart.defaults.color = 'rgb(25, 1, 57)';
+  Chart.defaults.font.weight = 400;
 
   const data = {
     labels: providers
