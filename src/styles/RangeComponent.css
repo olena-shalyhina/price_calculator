@@ -108,6 +108,10 @@
     gap: 24px;
     padding: clamp(14px, 2vh, 20px);
   }
+  .range_value_control .form-control {
+    font-size: 0.82rem;
+    width: 52px;
+  }
 }
 
 @media (max-width: 768px) {
