@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/price_calculator/static/css/main.ac350565.css",
+    "main.css": "/price_calculator/static/css/main.f68b1737.css",
     "main.js": "/price_calculator/static/js/main.c8d20297.js",
     "index.html": "/price_calculator/index.html",
-    "main.ac350565.css.map": "/price_calculator/static/css/main.ac350565.css.map",
+    "main.f68b1737.css.map": "/price_calculator/static/css/main.f68b1737.css.map",
     "main.c8d20297.js.map": "/price_calculator/static/js/main.c8d20297.js.map"
   },
   "entrypoints": [
-    "static/css/main.ac350565.css",
+    "static/css/main.f68b1737.css",
     "static/js/main.c8d20297.js"
   ]
 }
