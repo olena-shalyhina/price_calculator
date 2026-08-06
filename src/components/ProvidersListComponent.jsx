@@ -1,86 +1,103 @@
-import { React } from 'react';
-import Form from 'react-bootstrap/form';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
 import { useDispatch, useSelector } from 'react-redux';
+import { calculateTotalCost } from '../model/calculateTotalCost';
 import { setSelectedOptions } from '../store/optionsSlice';
 import '../styles/ProvidersListComponent.css';
 
 const ProvidersListComponent = ({ providers }) => {
   const dispatch = useDispatch();
+  const selectedOptionsFromStore = useSelector(
+    (state) => state.options.selectedOptions
+  );
+  const storageValue = useSelector((state) => state.range.storageValue);
+  const transferValue = useSelector((state) => state.range.transferValue);
 
-  const getInitialFormData = () => {
-    return providers
-      .filter((provider) => Object.keys(provider.priceStorage).length > 1)
-      .reduce(
-        (acc, provider) => ({
-          ...acc,
-          [provider.name]: Object.keys(provider.priceStorage)[0],
-        }),
-        {}
-      );
-  };
-
-  let selectedOptions = useSelector((state) => state.options.selectedOptions);
-
-  if (!Object.keys(selectedOptions).length) {
-    selectedOptions = getInitialFormData();
-  }
-
-  console.log(selectedOptions);
+  const defaultOptions = providers
+    .filter((provider) => typeof provider.priceStorage === 'object')
+    .reduce(
+      (options, provider) => ({
+        ...options,
+        [provider.name]: Object.keys(provider.priceStorage)[0],
+      }),
+      {}
+    );
+  const selectedOptions = { ...defaultOptions, ...selectedOptionsFromStore };
+  const providerCosts = calculateTotalCost(
+    providers,
+    storageValue,
+    transferValue,
+    selectedOptions
+  );
 
   const handleOnChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-
     dispatch(
       setSelectedOptions({
         ...selectedOptions,
-        [name]: value,
+        [event.target.name]: event.target.value,
       })
     );
-    console.log(selectedOptions);
   };
 
   return (
-    <>
-      {providers?.map((provider) =>
-        Object.keys(provider.priceStorage).length <= 1 ? (
-          <Row className="provider_list  " key={provider.id}>
-            <Col xs={2}>
-              <img src={provider.icon} alt="Logo"></img>
-            </Col>
-            <Col className="provider_list_name" xs={10}>
-              <p>{provider.name}</p>
-            </Col>
-          </Row>
-        ) : (
-          <Row className="provider_list  " key={provider.id}>
-            <Col xs={2}>
-              <img src={provider.icon} alt="Logo"></img>
-            </Col>
-            <Col className="provider_list_name" xs={10}>
-              <p>{provider.name}</p>
+    <section className="providers_section" aria-labelledby="providers-title">
+      <div className="providers_heading">
+        <p className="eyebrow">Compare providers</p>
+        <h2 id="providers-title">Available plans</h2>
+      </div>
+      <div className="providers_list">
+        {providers.map((provider, index) => {
+          const hasOptions = typeof provider.priceStorage === 'object';
+          const activeOption = selectedOptions[provider.name];
 
-              <Form className="provider_list_name_option">
-                {Object.keys(provider.priceStorage).map((option, index) => (
-                  <Form.Check
-                    key={index}
-                    inline
-                    label={option}
-                    name={provider.name}
-                    type="radio"
-                    value={option}
-                    checked={selectedOptions[provider.name] === option}
-                    onChange={handleOnChange}
-                  />
-                ))}
-              </Form>
-            </Col>
-          </Row>
-        )
-      )}
-    </>
+          return (
+            <article
+              className="provider_card"
+              key={provider.id}
+              style={{
+                '--provider-light': provider.palette[0],
+                '--provider-accent': provider.palette[1],
+                '--provider-dark': provider.palette[2],
+              }}
+            >
+              <div className="provider_card_top">
+                <span className="provider_logo" aria-hidden="true">
+                  {provider.mark}
+                </span>
+                <div className="provider_identity">
+                  <h3>{provider.name}</h3>
+                  <p>{hasOptions ? 'Choose storage type' : 'Single storage plan'}</p>
+                </div>
+                <output
+                  className="provider_price"
+                  aria-label={`${provider.name} monthly cost`}
+                >
+                  ${providerCosts[index].toFixed(2)}<span>/mo</span>
+                </output>
+              </div>
+              {hasOptions && (
+                <Form
+                  className="provider_options"
+                  aria-label={`${provider.name} storage type`}
+                >
+                  {Object.keys(provider.priceStorage).map((option) => (
+                    <Form.Check
+                      checked={activeOption === option}
+                      id={`${provider.id}-${option}`}
+                      key={option}
+                      label={option.toUpperCase()}
+                      name={provider.name}
+                      type="radio"
+                      value={option}
+                      onChange={handleOnChange}
+                    />
+                  ))}
+                </Form>
+              )}
+            </article>
+          );
+        })}
+      </div>
+    </section>
   );
 };
 

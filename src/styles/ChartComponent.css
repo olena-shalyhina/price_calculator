@@ -1,3 +1,60 @@
 .chart_bar {
+  background: linear-gradient(145deg, #ffffff 0%, #f7faff 100%);
+  border: 1px solid #e4ebf4;
+  border-radius: 20px;
+  box-shadow: 0 10px 28px rgba(36, 55, 84, 0.08);
+  padding: 24px;
   width: 100%;
+}
+.chart_canvas {
+  height: 310px;
+}
+.best_offer {
+  align-items: center;
+  background: #ecfdf3;
+  border: 1px solid #b7ebca;
+  border-radius: 14px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 16px 18px;
+}
+.best_offer_label {
+  color: #267447;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 3px;
+  text-transform: uppercase;
+}
+.best_offer h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0;
+  text-transform: capitalize;
+}
+.best_offer_price {
+  color: #17723d;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+.best_offer_price span {
+  color: #47705a;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+@media (max-width: 540px) {
+  .chart_bar {
+    border-radius: 16px;
+    padding: 16px;
+  }
+
+  .chart_canvas {
+    height: 260px;
+  }
+
+  .best_offer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
 }

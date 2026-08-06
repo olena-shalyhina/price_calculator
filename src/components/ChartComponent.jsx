@@ -1,72 +1,116 @@
-import React from 'react';
-import Chart from 'chart.js/auto';
+import 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
-import { calculatesTheTotalCost } from '../model/totalСostCalculation.js';
 import { useSelector } from 'react-redux';
+import { calculateTotalCost } from '../model/calculateTotalCost';
 import '../styles/ChartComponent.css';
 
-const ChartComponent = ({ providers }) => {
-  console.log(providers);
+const fallbackColors = [
+  ['#70d6c4', '#229c93', '#157a74'],
+  ['#a5d873', '#5da457', '#3f7d44'],
+  ['#f4ad8d', '#d96f69', '#b54e53'],
+  ['#f3db72', '#d1a943', '#aa7e24'],
+];
 
+const ChartComponent = ({ providers }) => {
   const storageValue = useSelector((state) => state.range.storageValue);
   const transferValue = useSelector((state) => state.range.transferValue);
   const selectedOptions = useSelector((state) => state.options.selectedOptions);
-
-  const chartData = calculatesTheTotalCost(
+  const chartData = calculateTotalCost(
     providers,
     storageValue,
     transferValue,
-    selectedOptions,
+    selectedOptions
   );
+  const lowestPrice = providers.length ? Math.min(...chartData) : null;
+  const bestProvider = providers.find(
+    (provider, index) => chartData[index] === lowestPrice
+  );
+  const chartColors = providers.map((provider) => provider.palette ?? fallbackColors[0]);
+  const getGradient = (context) => {
+    const { ctx, chartArea } = context.chart;
+    const colorIndex = context.dataIndex ?? 0;
+    const colors = chartColors[colorIndex % chartColors.length] ?? fallbackColors[0];
 
-  Chart.defaults.font.size = 8;
-  Chart.defaults.color = 'rgb(25, 1, 57)';
-  Chart.defaults.font.weight = 400;
+    if (!chartArea) return colors[1];
+
+    const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+    gradient.addColorStop(0, colors[0]);
+    gradient.addColorStop(1, colors[1]);
+    return gradient;
+  };
 
   const data = {
-    labels: providers
-      ? providers.map((provider) => provider.name.toUpperCase())
-      : '',
-    font: {
-      size: 10,
-    },
-
+    labels: providers.map((provider) => provider.name),
     datasets: [
       {
-        label: '',
+        label: 'Monthly cost',
         data: chartData,
-        backgroundColor: [
-          'rgb(44, 137, 140, 0.5)',
-          'rgb(91, 144, 64, 0.5)',
-          'rgb(191, 94, 70, 0.5)',
-          'rgb(196, 196, 63, 0.5)',
-        ],
-        borderColor: [
-          'rgb(44, 137, 140)',
-          'rgb(91, 144, 64)',
-          'rgb(191, 94, 70)',
-          'rgb(196, 196, 63)',
-        ],
-        borderWidth: 3,
+        backgroundColor: getGradient,
+        borderColor: (context) => {
+          const colorIndex = context.dataIndex ?? 0;
+          return (
+            chartColors[colorIndex % chartColors.length] ?? fallbackColors[0]
+          )[2];
+        },
+        borderRadius: 14,
+        borderSkipped: false,
+        borderWidth: 1,
+        hoverBorderWidth: 3,
       },
     ],
   };
   const options = {
+    maintainAspectRatio: false,
+    layout: { padding: { top: 8, left: 4, right: 4 } },
     plugins: {
-      legend: {
-        display: false,
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#17233c',
+        bodyFont: { size: 13, weight: '600' },
+        caretPadding: 10,
+        cornerRadius: 10,
+        displayColors: false,
+        padding: 12,
+        titleFont: { size: 12, weight: '500' },
+        callbacks: {
+          label: (context) => `$${context.parsed.y.toFixed(2)} / month`,
+        },
       },
     },
-    // indexAxis: 'y',
     scales: {
+      x: {
+        grid: { display: false },
+        ticks: { color: '#506078', font: { size: 12, weight: '600' } },
+      },
       y: {
         beginAtZero: true,
+        border: { display: false },
+        grid: { color: '#e8edf4' },
+        ticks: {
+          color: '#748197',
+          font: { size: 11 },
+          callback: (value) => `$${value}`,
+        },
       },
     },
   };
+
   return (
     <div className="chart_bar">
-      <Bar type="Bar" data={data} options={options}></Bar>
+      {bestProvider && (
+        <section className="best_offer" aria-live="polite">
+          <div>
+            <p className="best_offer_label">Best value</p>
+            <h2>{bestProvider.name}</h2>
+          </div>
+          <output className="best_offer_price">
+            ${lowestPrice.toFixed(2)} <span>/ month</span>
+          </output>
+        </section>
+      )}
+      <div className="chart_canvas">
+        <Bar data={data} options={options} />
+      </div>
     </div>
   );
 };

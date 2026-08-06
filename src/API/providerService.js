@@ -1,15 +1,17 @@
 const providers = [
   {
-    name: 'backblaze',
-    icon: 'https://cdn-icons-png.flaticon.com/512/1740/1740930.png',
+    name: 'Nimbus Vault',
+    mark: 'NV',
+    palette: ['#70d6c4', '#229c93', '#157a74'],
     minPayment: 7,
     priceStorage: 0.005,
     priceTransfer: 0.01,
     id: 1,
   },
   {
-    name: 'bunny',
-    icon: 'https://cdn-icons-png.flaticon.com/512/5536/5536225.png',
+    name: 'Polarbyte',
+    mark: 'PB',
+    palette: ['#a5d873', '#5da457', '#3f7d44'],
     maxPayment: 10,
     priceStorage: {
       hdd: 0.01,
@@ -19,8 +21,9 @@ const providers = [
     id: 2,
   },
   {
-    name: 'scaleway',
-    icon: 'https://cdn-icons-png.flaticon.com/512/1516/1516898.png',
+    name: 'AstraStore',
+    mark: 'AS',
+    palette: ['#f4ad8d', '#d96f69', '#b54e53'],
     priceStorage: {
       multi: 0.06,
       single: 0.03,
@@ -30,8 +33,9 @@ const providers = [
     id: 3,
   },
   {
-    name: 'vultr',
-    icon: 'https://cdn-icons-png.flaticon.com/512/5836/5836555.png',
+    name: 'Skyforge',
+    mark: 'SF',
+    palette: ['#f3db72', '#d1a943', '#aa7e24'],
     minPayment: 5,
     priceStorage: 0.01,
     priceTransfer: 0.01,

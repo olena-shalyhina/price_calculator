@@ -12,35 +12,44 @@ const RangeComponent = () => {
   const rangemax = 1000;
 
   return (
-    <div className="range_wrapper">
-      <div className="storage_range">
-        <Form.Label>{`Storage: ${storageValue} GB`}</Form.Label>
-        <Form.Range
-          min={rangemin}
-          max={rangemax}
-          id="storage_range"
-          value={storageValue}
-          onChange={(event) => {
-            dispatch(setStorageValue(event.target.value));
-          }}
-        />
+    <section className="usage_card" aria-labelledby="usage-title">
+      <div className="usage_card_heading">
+        <p className="eyebrow">Your usage</p>
+        <h2 id="usage-title">Monthly consumption</h2>
       </div>
-      <div className="transfer_range">
-        <Form.Label>
-          {`Transfer: ${transferValue}
-          GB`}
-        </Form.Label>
-        <Form.Range
-          min={rangemin}
-          max={rangemax}
-          id="transfer_range"
-          value={transferValue}
-          onChange={(event) => {
-            dispatch(setTransferValue(event.target.value));
-          }}
-        />
+      <div className="range_wrapper">
+        <div className="storage_range">
+          <Form.Label htmlFor="storage_range" className="range_label">
+            <span>Storage</span>
+            <output>{storageValue} GB</output>
+          </Form.Label>
+          <Form.Range
+            min={rangemin}
+            max={rangemax}
+            id="storage_range"
+            value={storageValue}
+            onChange={(event) => {
+              dispatch(setStorageValue(event.target.value));
+            }}
+          />
+        </div>
+        <div className="transfer_range">
+          <Form.Label htmlFor="transfer_range" className="range_label">
+            <span>Transfer</span>
+            <output>{transferValue} GB</output>
+          </Form.Label>
+          <Form.Range
+            min={rangemin}
+            max={rangemax}
+            id="transfer_range"
+            value={transferValue}
+            onChange={(event) => {
+              dispatch(setTransferValue(event.target.value));
+            }}
+          />
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

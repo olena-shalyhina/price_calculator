@@ -8,7 +8,7 @@ import ProvidersListComponent from './ProvidersListComponent.jsx';
 import '../styles/SummaryChartComponent.css';
 
 const SummaryChartComponent = () => {
-  const [providers, setProviders] = useState('');
+  const [providers, setProviders] = useState([]);
 
   useEffect(() => {
     fetchProviders();
@@ -24,7 +24,7 @@ const SummaryChartComponent = () => {
       <Row className="main align-items-center justify-content-center">
         <Col md={4} sm={12}>
           <Row className="mb-2">
-            {providers ? <ProvidersListComponent providers={providers} /> : ''}
+            {providers.length > 0 && <ProvidersListComponent providers={providers} />}
           </Row>
         </Col>
         <Col md={8} sm={12}>

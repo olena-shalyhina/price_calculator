@@ -1,27 +1,53 @@
 .range_wrapper {
-  min-height: 80px;
-  margin: auto;
+  gap: 32px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  text-align: center;
+}
+.usage_card {
+  background: #f8fafc;
+  border: 1px solid #e5ebf3;
+  border-radius: 16px;
+  padding: 24px;
+}
+.usage_card_heading h2 {
+  font-size: 1.1rem;
+  margin-bottom: 24px;
 }
 
 .storage_range,
 .transfer_range {
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 50%;
   font-size: 1em;
   font-weight: 500;
 }
+.range_label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #43516a;
+  margin-bottom: 8px;
+}
+.range_label output {
+  background: #e8efff;
+  border-radius: 6px;
+  color: #244b97;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 4px 8px;
+}
 
 @media (max-width: 540px) {
-  range_wrapper {
-    min-height: 100px;
+  .range_wrapper {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 20px;
   }
   .storage_range,
   .transfer_range {
-    font-size: 0.7em;
+    font-size: 0.9em;
+    width: 100%;
   }
 }

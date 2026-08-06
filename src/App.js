@@ -6,11 +6,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <div className="App">
-      <div className="main_container">
-        <h1 className="padding pt-4">Price Calculate</h1>
-        <RangeComponent />
-        <SummaryChartComponent />
-      </div>
+      <main className="main_container">
+        <section className="calculator_card" aria-labelledby="page-title">
+          <header className="calculator_header">
+            <p className="eyebrow">Cloud storage</p>
+            <h1 id="page-title">Price calculator</h1>
+            <p className="calculator_description">
+              Compare monthly storage and transfer costs across providers.
+            </p>
+          </header>
+          <RangeComponent />
+          <SummaryChartComponent />
+        </section>
+      </main>
     </div>
   );
 }
