@@ -20,12 +20,12 @@ const SummaryChartComponent = () => {
   };
 
   return (
-    <Container className="mt-5">
-      <Row className="main align-items-center justify-content-center">
+    <Container fluid className='comparison_container mt-lg-4 mt-4 px-0'>
+      <Row className='main align-items-end justify-content-center'>
         <Col md={4} sm={12}>
-          <Row className="mb-2">
-            {providers.length > 0 && <ProvidersListComponent providers={providers} />}
-          </Row>
+          {providers.length > 0 && (
+            <ProvidersListComponent providers={providers} />
+          )}
         </Col>
         <Col md={8} sm={12}>
           <ChartComponent providers={providers} />

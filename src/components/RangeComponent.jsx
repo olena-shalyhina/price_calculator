@@ -10,6 +10,8 @@ const RangeComponent = () => {
   const transferValue = useSelector((state) => state.range.transferValue);
   const rangemin = 0;
   const rangemax = 1000;
+  const normalizeValue = (value) =>
+    Math.min(rangemax, Math.max(rangemin, Number(value) || 0));
 
   return (
     <section className="usage_card" aria-labelledby="usage-title">
@@ -21,7 +23,19 @@ const RangeComponent = () => {
         <div className="storage_range">
           <Form.Label htmlFor="storage_range" className="range_label">
             <span>Storage</span>
-            <output>{storageValue} GB</output>
+            <span className="range_value_control">
+              <Form.Control
+                aria-label="Storage in gigabytes"
+                max={rangemax}
+                min={rangemin}
+                type="number"
+                value={storageValue}
+                onChange={(event) => {
+                  dispatch(setStorageValue(normalizeValue(event.target.value)));
+                }}
+              />
+              <span>GB</span>
+            </span>
           </Form.Label>
           <Form.Range
             min={rangemin}
@@ -29,14 +43,30 @@ const RangeComponent = () => {
             id="storage_range"
             value={storageValue}
             onChange={(event) => {
-              dispatch(setStorageValue(event.target.value));
+              dispatch(setStorageValue(normalizeValue(event.target.value)));
             }}
           />
+          <div className="range_scale" aria-hidden="true">
+            <span>{rangemin} GB</span>
+            <span>{rangemax} GB</span>
+          </div>
         </div>
         <div className="transfer_range">
           <Form.Label htmlFor="transfer_range" className="range_label">
             <span>Transfer</span>
-            <output>{transferValue} GB</output>
+            <span className="range_value_control">
+              <Form.Control
+                aria-label="Transfer in gigabytes"
+                max={rangemax}
+                min={rangemin}
+                type="number"
+                value={transferValue}
+                onChange={(event) => {
+                  dispatch(setTransferValue(normalizeValue(event.target.value)));
+                }}
+              />
+              <span>GB</span>
+            </span>
           </Form.Label>
           <Form.Range
             min={rangemin}
@@ -44,9 +74,13 @@ const RangeComponent = () => {
             id="transfer_range"
             value={transferValue}
             onChange={(event) => {
-              dispatch(setTransferValue(event.target.value));
+              dispatch(setTransferValue(normalizeValue(event.target.value)));
             }}
           />
+          <div className="range_scale" aria-hidden="true">
+            <span>{rangemin} GB</span>
+            <span>{rangemax} GB</span>
+          </div>
         </div>
       </div>
     </section>

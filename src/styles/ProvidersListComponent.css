@@ -117,9 +117,33 @@
   line-height: 1;
 }
 
-.form-range:focus {
-  box-shadow: 0 0 0 3px rgba(36, 75, 151, 0.25);
-  outline: 0;
+@media (min-width: 992px) {
+  .providers_list {
+    gap: 8px;
+  }
+
+  .provider_card {
+    padding: 10px 12px;
+  }
+
+  .provider_options {
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .provider_identity h3 {
+    font-size: 0.9rem;
+  }
+
+  .provider_identity p,
+  .provider_options .form-check-label {
+    font-size: 0.7rem;
+  }
+
+  .provider_price {
+    font-size: 0.94rem;
+  }
 }
 
 @media (max-width: 540px) {
