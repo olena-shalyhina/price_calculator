@@ -7,7 +7,7 @@ import '../styles/ProvidersListComponent.css';
 const ProvidersListComponent = ({ providers }) => {
   const dispatch = useDispatch();
   const selectedOptionsFromStore = useSelector(
-    (state) => state.options.selectedOptions
+    (state) => state.options.selectedOptions,
   );
   const storageValue = useSelector((state) => state.range.storageValue);
   const transferValue = useSelector((state) => state.range.transferValue);
@@ -19,14 +19,14 @@ const ProvidersListComponent = ({ providers }) => {
         ...options,
         [provider.name]: Object.keys(provider.priceStorage)[0],
       }),
-      {}
+      {},
     );
   const selectedOptions = { ...defaultOptions, ...selectedOptionsFromStore };
   const providerCosts = calculateTotalCost(
     providers,
     storageValue,
     transferValue,
-    selectedOptions
+    selectedOptions,
   );
 
   const handleOnChange = (event) => {
@@ -34,24 +34,26 @@ const ProvidersListComponent = ({ providers }) => {
       setSelectedOptions({
         ...selectedOptions,
         [event.target.name]: event.target.value,
-      })
+      }),
     );
   };
 
   return (
-    <section className="providers_section" aria-labelledby="providers-title">
-      <div className="providers_heading">
-        <p className="eyebrow">Compare providers</p>
-        <h2 id="providers-title">Available plans</h2>
+    <section className='providers_section' aria-labelledby='providers-title'>
+      <div className='providers_heading'>
+        <p className='eyebrow px-3'>Compare providers</p>
+        <h2 id='providers-title' className='px-3'>
+          Available plans
+        </h2>
       </div>
-      <div className="providers_list">
+      <div className='providers_list'>
         {providers.map((provider, index) => {
           const hasOptions = typeof provider.priceStorage === 'object';
           const activeOption = selectedOptions[provider.name];
 
           return (
             <article
-              className="provider_card"
+              className='provider_card'
               key={provider.id}
               style={{
                 '--provider-light': provider.palette[0],
@@ -59,24 +61,27 @@ const ProvidersListComponent = ({ providers }) => {
                 '--provider-dark': provider.palette[2],
               }}
             >
-              <div className="provider_card_top">
-                <span className="provider_logo" aria-hidden="true">
+              <div className='provider_card_top'>
+                <span className='provider_logo' aria-hidden='true'>
                   {provider.mark}
                 </span>
-                <div className="provider_identity">
+                <div className='provider_identity'>
                   <h3>{provider.name}</h3>
-                  <p>{hasOptions ? 'Choose storage type' : 'Single storage plan'}</p>
+                  <p>
+                    {hasOptions ? 'Choose storage type' : 'Single storage plan'}
+                  </p>
                 </div>
                 <output
-                  className="provider_price"
+                  className='provider_price'
                   aria-label={`${provider.name} monthly cost`}
                 >
-                  ${providerCosts[index].toFixed(2)}<span>/mo</span>
+                  ${providerCosts[index].toFixed(2)}
+                  <span>/mo</span>
                 </output>
               </div>
               {hasOptions && (
                 <Form
-                  className="provider_options"
+                  className='provider_options'
                   aria-label={`${provider.name} storage type`}
                 >
                   {Object.keys(provider.priceStorage).map((option) => (
@@ -86,7 +91,7 @@ const ProvidersListComponent = ({ providers }) => {
                       key={option}
                       label={option.toUpperCase()}
                       name={provider.name}
-                      type="radio"
+                      type='radio'
                       value={option}
                       onChange={handleOnChange}
                     />
