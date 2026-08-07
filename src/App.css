@@ -1,6 +1,6 @@
 .App {
   background: #f4f7fb;
-  padding: 48px 24px;
+  padding: 24px;
   box-sizing: border-box;
   min-height: 100vh;
   color: #17233c;
@@ -34,14 +34,14 @@
 }
 
 .calculator_card h1,
-h2,
-p {
+.calculator_card h2,
+.calculator_card p {
   margin-top: 0;
 }
 
 .calculator_card h1 {
   color: #17233c;
-  font-size: 32px;
+  font-size: 36px;
   line-height: 1.2;
   font-weight: 700;
   margin-bottom: 8px;
@@ -54,11 +54,6 @@ p {
 }
 
 @media (min-width: 992px) {
-  .App {
-    padding-top: 32px;
-    padding-bottom: 32px;
-  }
-
   .calculator_card {
     padding: 24px;
   }
@@ -67,9 +62,6 @@ p {
     margin-bottom: 20px;
   }
 
-  .calculator_card .container.mt-5 {
-    margin-top: 24px !important;
-  }
 }
 
 @media (max-width: 768px) {
@@ -92,7 +84,7 @@ p {
 
 @media (max-width: 540px) {
   .App {
-    padding: 20px 12px;
+    padding: 16px 12px;
   }
 
   .calculator_card {
